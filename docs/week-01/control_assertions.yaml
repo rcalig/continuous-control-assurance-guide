@@ -1,7 +1,0 @@
-- assertion_id: RAP-01
-  control_domain: Identity
-  essential8_strategy: Restrict Administrative Privileges
-  maturity_level: 1
-  description: No permanent administrative privileges exist
-  evidence_type: configuration
-  evaluation_frequency: daily
