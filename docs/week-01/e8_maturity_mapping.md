@@ -6,8 +6,11 @@ To translate maturity levels into enforceable control expectations.
 ## Multi-Factor Authentication
 ### Base Assertions
 MFA-01: All privileged user accounts require multi-factor authentication for interactive access.
+
 MFA-02: Multi-factor authentication enforcement cannot be bypassed for privileged user accounts.
+
 MFA-03: Only cryptographically strong authentication factors are permitted for multi-factor authentication.
+
 MFA-04: All changes to multi-factor authentication configuration are logged centrally.
 
 ### Maturity Level 1
@@ -28,8 +31,11 @@ MFA-04: All changes to multi-factor authentication configuration are logged cent
 ## Restrict Administrative Privileges
 ### Base Assertions
 RAP-01: No user accounts have permanent administrative privileges.
+
 RAP-02: Administrative access is granted only through role-based mechanisms.
+
 RAP-03: All administrative role assignments are logged centrally.
+
 RAP-04: Administrative access configurations cannot be modified without approval.
 
 ### Maturity Level 1
@@ -50,8 +56,11 @@ RAP-04: Administrative access configurations cannot be modified without approval
 ## Patch Operating Systems
 ### Base Assertions
 POS-01: All supported operating systems have current security patches installed within a defined timeframe.
+
 POS-02: No unsupported or end-of-life operating systems are in use.
+
 POS-03: Operating system patch sources are restricted to trusted update mechanisms.
+
 POS-04: Operating system patch failures are detected and recorded.
 
 ### Maturity Level 1
