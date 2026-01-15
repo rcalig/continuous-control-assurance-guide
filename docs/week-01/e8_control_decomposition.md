@@ -22,8 +22,11 @@ that could allow compromise of systems or data.
 - Cloud and SaaS platforms
 ### Atomic Control Assertions
 RAP-01: No user accounts have permanent administrative privileges.
+
 RAP-02: Administrative access is granted only through role-based mechanisms.
+
 RAP-03: All administrative role assignments are logged centrally.
+
 RAP-04: Administrative access configurations cannot be modified without approval.
 
 ## Multi-Factor Authentication
