@@ -20,7 +20,7 @@ RAP-01
 
 RAP-02
 
-SOCI Risk Outcome Supported
+SOCI Risk Outcome Supported:
 Prevents unauthorised access to systems supporting critical infrastructure by enforcing strong authentication and restricting privileged access.
 
 ## Privileged Access Management
@@ -35,7 +35,7 @@ RAP-03
 
 RAP-04
 
-SOCI Risk Outcome Supported
+SOCI Risk Outcome Supported:
 Reduces the likelihood and impact of compromise of privileged access to critical systems.
 
 ## System Hardening & Vulnerability Reduction
@@ -48,7 +48,7 @@ POS-02
 
 POS-03
 
-SOCI Risk Outcome Supported
+SOCI Risk Outcome Supported:
 Reduces exposure of critical systems to known vulnerabilities and supply-chain compromise.
 
 ## Logging, Monitoring & Detection
@@ -61,7 +61,7 @@ RAP-03
 
 POS-04
 
-SOCI Risk Outcome Supported
+SOCI Risk Outcome Supported:
 Enables timely detection and investigation of cyber security events affecting critical infrastructure.
 
 ## Change Control & Configuration Integrity
@@ -74,6 +74,6 @@ MFA-04
 
 POS-03
 
-SOCI Risk Outcome Supported
+SOCI Risk Outcome Supported:
 Prevents unauthorised or untracked changes to security-critical configurations.
 
