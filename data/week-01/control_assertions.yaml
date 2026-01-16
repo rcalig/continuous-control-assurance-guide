@@ -1,7 +1,121 @@
-- assertion_id: RAP-01
+- assertion_id: MFA-01
   control_domain: Identity
-  essential8_strategy: Restrict Administrative Privileges
-  maturity_level: 1
-  description: No permanent administrative privileges exist
+  essential8_strategy: Multi-Factor Authentication
+  base_assertion: true
+  description: All privileged user accounts require multi-factor authentication for interactive access
+  soci_themes:
+    - identity_and_access
   evidence_type: configuration
   evaluation_frequency: daily
+
+- assertion_id: MFA-02
+  control_domain: Identity
+  essential8_strategy: Multi-Factor Authentication
+  base_assertion: true
+  description: Multi-factor authentication enforcement cannot be bypassed for privileged user accounts
+  soci_themes:
+    - identity_and_access
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: MFA-03
+  control_domain: Identity
+  essential8_strategy: Multi-Factor Authentication
+  base_assertion: true
+  description: Only cryptographically strong authentication factors are permitted for multi-factor authentication
+  soci_themes:
+    - identity_and_access
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: MFA-04
+  control_domain: Identity
+  essential8_strategy: Multi-Factor Authentication
+  base_assertion: true
+  description: All changes to multi-factor authentication configuration are logged centrally
+  soci_themes:
+    - logging_and_monitoring
+    - change_control
+  evidence_type: logs
+  evaluation_frequency: continuous
+
+- assertion_id: RAP-01
+  control_domain: Privileged_Access
+  essential8_strategy: Restrict Administrative Privileges
+  base_assertion: true
+  description: No user accounts have permanent administrative privileges
+  soci_themes:
+    - privileged_access
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: RAP-02
+  control_domain: Privileged_Access
+  essential8_strategy: Restrict Administrative Privileges
+  base_assertion: true
+  description: Administrative access is granted only through role-based mechanisms
+  soci_themes:
+    - privileged_access
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: RAP-03
+  control_domain: Privileged_Access
+  essential8_strategy: Restrict Administrative Privileges
+  base_assertion: true
+  description: All administrative role assignments are logged centrally
+  soci_themes:
+    - logging_and_monitoring
+  evidence_type: logs
+  evaluation_frequency: continuous
+
+- assertion_id: RAP-04
+  control_domain: Privileged_Access
+  essential8_strategy: Restrict Administrative Privileges
+  base_assertion: true
+  description: Administrative access configurations cannot be modified without approval
+  soci_themes:
+    - change_control
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: POS-01
+  control_domain: Patch_Management
+  essential8_strategy: Patch Operating Systems
+  base_assertion: true
+  description: Supported operating systems have current security patches installed within a defined timeframe
+  soci_themes:
+    - system_hardening
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: POS-02
+  control_domain: Patch_Management
+  essential8_strategy: Patch Operating Systems
+  base_assertion: true
+  description: No unsupported or end-of-life operating systems are in use
+  soci_themes:
+    - system_hardening
+  evidence_type: inventory
+  evaluation_frequency: daily
+
+- assertion_id: POS-03
+  control_domain: Patch_Management
+  essential8_strategy: Patch Operating Systems
+  base_assertion: true
+  description: Operating system patch sources are restricted to trusted update mechanisms
+  soci_themes:
+    - change_control
+    - supply_chain
+  evidence_type: configuration
+  evaluation_frequency: daily
+
+- assertion_id: POS-04
+  control_domain: Patch_Management
+  essential8_strategy: Patch Operating Systems
+  base_assertion: true
+  description: Operating system patch failures are detected and recorded
+  soci_themes:
+    - logging_and_monitoring
+  evidence_type: logs
+  evaluation_frequency: continuous
