@@ -1,0 +1,21 @@
+controls:
+  - control_family: Multi-Factor Authentication
+    essential8_strategy: Multi-Factor Authentication
+    soci_themes: [identity_and_access]
+    assertions:
+      - assertion_id: MFA-01
+        evidence_type: configuration_state
+        frequency: daily
+        required_evidence: [mfa_policy_state]
+      - assertion_id: MFA-02
+        evidence_type: configuration_state
+        frequency: daily
+        required_evidence: [mfa_bypass_rules]
+      - assertion_id: MFA-03
+        evidence_type: configuration_state
+        frequency: daily
+        required_evidence: [allowed_factors]
+      - assertion_id: MFA-04
+        evidence_type: audit_events
+        frequency: continuous
+        required_evidence: [mfa_config_change_events]
