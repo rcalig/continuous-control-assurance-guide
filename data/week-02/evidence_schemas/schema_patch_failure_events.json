@@ -1,1 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "patch_failure_events",
+  "type": "object",
+  "required": ["timestamp", "source", "environment", "events"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "source": { "type": "string" },
+    "environment": { "type": "string" },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["event_time", "asset_id", "hostname", "failure_type", "result", "correlation_id"],
+        "properties": {
+          "event_time": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "hostname": { "type": "string" },
+          "failure_type": { "type": "string" },
+          "result": { "type": "string" },
+          "correlation_id": { "type": "string" }
+        }
+      }
+    }
+  }
+}
 
