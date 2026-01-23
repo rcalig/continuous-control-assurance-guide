@@ -1,1 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "privileged_role_assignments",
+  "type": "object",
+  "required": ["timestamp", "source", "tenant_or_account", "assignments"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "source": { "type": "string" },
+    "tenant_or_account": { "type": "string" },
+    "assignments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role_name", "principal_id", "principal_type", "assignment_type"],
+        "properties": {
+          "role_name": { "type": "string" },
+          "principal_id": { "type": "string" },
+          "principal_type": { "type": "string", "enum": ["user", "service", "role"] },
+          "assignment_type": { "type": "string", "enum": ["permanent", "temporary"] }
+        }
+      }
+    }
+  }
+}
 
