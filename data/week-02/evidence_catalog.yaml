@@ -1,8 +1,50 @@
 evidence_objects:
   - name: mfa_policy_state
     type: configuration_state
-    description: MFA enforcement settings for privileged interactive access
+    description: MFA enforcement and bypass configuration for privileged interactive access
     schema: evidence_schemas/schema_mfa_policy_state.json
-    used_by_assertions:
-      - MFA-01
+    used_by_assertions: [MFA-01, MFA-02, MFA-03]
+
+  - name: mfa_audit_events
+    type: audit_events
+    description: Central audit events for MFA configuration changes
+    schema: evidence_schemas/schema_audit_events.json
+    used_by_assertions: [MFA-04]
+
+  - name: privileged_role_assignments
+    type: identity_inventory
+    description: Inventory of privileged roles and who/what is assigned to them
+    schema: evidence_schemas/schema_privileged_role_assignments.json
+    used_by_assertions: [RAP-01, RAP-02]
+
+  - name: admin_role_assignment_events
+    type: audit_events
+    description: Central audit events for admin role assignment changes
+    schema: evidence_schemas/schema_audit_events.json
+    used_by_assertions: [RAP-03]
+
+  - name: admin_config_controls
+    type: configuration_state
+    description: Configuration constraints that protect privileged access settings from unauthorised change
+    schema: evidence_schemas/schema_admin_config_controls.json
+    used_by_assertions: [RAP-04]
+
+  - name: patch_inventory_state
+    type: patch_inventory
+    description: Patch and OS support posture per asset/host
+    schema: evidence_schemas/schema_patch_inventory_state.json
+    used_by_assertions: [POS-01, POS-02]
+
+  - name: patch_source_config
+    type: configuration_state
+    description: OS update source configuration and whether it can be overridden
+    schema: evidence_schemas/schema_patch_source_config.json
+    used_by_assertions: [POS-03]
+
+  - name: patch_failure_events
+    type: audit_events
+    description: Central events for patch failures and exceptions
+    schema: evidence_schemas/schema_patch_failure_events.json
+    used_by_assertions: [POS-04]
+
 
