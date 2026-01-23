@@ -1,1 +1,13 @@
+{
+  "timestamp": "2026-01-23T01:00:00Z",
+  "source": "sample_idp",
+  "tenant_or_account": "demo-tenant-001",
+  "privileged_scope": {
+    "definition": "Privileged users are members of admin roles/groups",
+    "included_groups_or_roles": ["GlobalAdmin", "SecurityAdmin", "PrivilegedRoleAdmin"]
+  },
+  "mfa_required": true,
+  "allowed_factors": ["fido2", "totp", "push"],
+  "bypass_rules": []
+}
 
