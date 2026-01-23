@@ -1,1 +1,11 @@
+{
+  "timestamp": "2026-01-23T01:15:00Z",
+  "source": "sample_idp",
+  "tenant_or_account": "demo-tenant-001",
+  "protected_settings": ["privileged_role_definitions", "privileged_role_assignment_policies"],
+  "change_constraints": {
+    "requires_change_control": true,
+    "allowed_changers_scope": ["BreakGlassAdmins", "SecurityEngineering"]
+  }
+}
 
