@@ -1,1 +1,16 @@
+{
+  "timestamp": "2026-01-23T01:30:00Z",
+  "source": "sample_patch_platform_events",
+  "environment": "prod",
+  "events": [
+    {
+      "event_time": "2026-01-23T00:55:00Z",
+      "asset_id": "asset-003",
+      "hostname": "srv-db-01",
+      "failure_type": "PATCH_INSTALL_FAILED",
+      "result": "FAILURE",
+      "correlation_id": "patch-evt-2001"
+    }
+  ]
+}
 
