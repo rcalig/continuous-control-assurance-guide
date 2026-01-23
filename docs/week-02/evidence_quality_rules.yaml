@@ -1,0 +1,16 @@
+rules:
+  freshness:
+    daily_max_age_hours: 36
+    continuous_max_age_minutes: 30
+
+  required_common_fields:
+    - timestamp
+    - source
+
+  assertion_specific:
+    MFA-01:
+      required_evidence_objects: [mfa_policy_state]
+      min_fields: [mfa_required, privileged_scope]
+    POS-02:
+      required_evidence_objects: [patch_inventory_state]
+      min_fields: [asset_id, os_version, is_supported]
