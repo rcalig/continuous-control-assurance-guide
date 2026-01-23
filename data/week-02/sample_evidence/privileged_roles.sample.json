@@ -1,1 +1,11 @@
+{
+  "timestamp": "2026-01-23T01:10:00Z",
+  "source": "sample_iam",
+  "tenant_or_account": "demo-tenant-001",
+  "assignments": [
+    { "role_name": "GlobalAdmin", "principal_id": "user:alice@example.com", "principal_type": "user", "assignment_type": "temporary" },
+    { "role_name": "SecurityAdmin", "principal_id": "user:bob@example.com", "principal_type": "user", "assignment_type": "temporary" },
+    { "role_name": "PrivilegedRoleAdmin", "principal_id": "service:svc-ci", "principal_type": "service", "assignment_type": "permanent" }
+  ]
+}
 
