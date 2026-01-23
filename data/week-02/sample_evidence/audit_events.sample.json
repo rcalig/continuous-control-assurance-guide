@@ -1,1 +1,24 @@
+{
+  "timestamp": "2026-01-23T01:05:00Z",
+  "source": "sample_idp_audit",
+  "tenant_or_account": "demo-tenant-001",
+  "events": [
+    {
+      "event_time": "2026-01-23T00:10:00Z",
+      "actor": "admin_user_01",
+      "action": "MFA_POLICY_UPDATED",
+      "target": "MFA_POLICY",
+      "result": "SUCCESS",
+      "correlation_id": "evt-1001"
+    },
+    {
+      "event_time": "2026-01-23T00:30:00Z",
+      "actor": "admin_user_02",
+      "action": "ADMIN_ROLE_ASSIGNED",
+      "target": "user:alice@example.com -> role:GlobalAdmin",
+      "result": "SUCCESS",
+      "correlation_id": "evt-1002"
+    }
+  ]
+}
 
