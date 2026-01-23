@@ -8,6 +8,7 @@
   },
   "mfa_required": true,
   "allowed_factors": ["fido2", "totp", "push"],
-  "bypass_rules": []
+  "bypass_rules": [
+    { "rule_id": "legacy-app-exception", "enabled": false, "scope": "Privileged users" }
+  ]
 }
-
