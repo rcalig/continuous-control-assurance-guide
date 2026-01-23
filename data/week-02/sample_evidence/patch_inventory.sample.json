@@ -1,1 +1,26 @@
+{
+  "timestamp": "2026-01-23T01:20:00Z",
+  "source": "sample_patch_platform",
+  "environment": "prod",
+  "assets": [
+    {
+      "asset_id": "asset-001",
+      "hostname": "srv-app-01",
+      "os_name": "Windows Server",
+      "os_version": "2019",
+      "is_supported": true,
+      "last_patch_date": "2026-01-15",
+      "patch_compliance_state": "compliant"
+    },
+    {
+      "asset_id": "asset-002",
+      "hostname": "srv-legacy-01",
+      "os_name": "Windows Server",
+      "os_version": "2008",
+      "is_supported": false,
+      "last_patch_date": "2025-08-01",
+      "patch_compliance_state": "unknown"
+    }
+  ]
+}
 
