@@ -12,14 +12,14 @@ def main() -> int:
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     evidence = json.loads(EVIDENCE_PATH.read_text(encoding="utf-8"))
 
-    try:
-        validate(instance=evidence, schema=schema)
-        print("PASS: Evidence matches schema (mfa_policy_state).")
-        return 0
-    except ValidationError as e:
-        print("FAIL: Evidence does not match schema (mfa_policy_state).")
-        print(f"Reason: {e.message}")
-        return 1
+try:
+    validate(instance=evidence, schema=schema)
+    print("PASS: Evidence matches schema.")
+    return 0
+except ValidationError as e:
+    print("FAIL: Evidence does not match schema.")
+    print(f"Reason: {e.message}")
+    return 1
 
 if __name__ == "__main__":
     raise SystemExit(main())
