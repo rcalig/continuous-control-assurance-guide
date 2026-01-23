@@ -1,1 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "audit_events",
+  "type": "object",
+  "required": ["timestamp", "source", "tenant_or_account", "events"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "source": { "type": "string" },
+    "tenant_or_account": { "type": "string" },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["event_time", "actor", "action", "target", "result", "correlation_id"],
+        "properties": {
+          "event_time": { "type": "string" },
+          "actor": { "type": "string" },
+          "action": { "type": "string" },
+          "target": { "type": "string" },
+          "result": { "type": "string" },
+          "correlation_id": { "type": "string" }
+        }
+      }
+    }
+  }
+}
 
