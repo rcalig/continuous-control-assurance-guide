@@ -1,1 +1,8 @@
+{
+  "timestamp": "2026-01-23T01:25:00Z",
+  "source": "sample_config_mgmt",
+  "environment": "prod",
+  "allowed_update_sources": ["vendor_official_repo", "enterprise_wsux", "approved_mirror_repo"],
+  "override_allowed": false
+}
 
