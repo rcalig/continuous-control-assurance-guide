@@ -1,1 +1,8 @@
+evidence_objects:
+  - name: mfa_policy_state
+    type: configuration_state
+    description: MFA enforcement settings for privileged interactive access
+    schema: evidence_schemas/schema_mfa_policy_state.json
+    used_by_assertions:
+      - MFA-01
 
