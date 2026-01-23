@@ -1,1 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "patch_source_config",
+  "type": "object",
+  "required": ["timestamp", "source", "environment", "allowed_update_sources", "override_allowed"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "source": { "type": "string" },
+    "environment": { "type": "string" },
+    "allowed_update_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "override_allowed": { "type": "boolean" }
+  }
+}
 
