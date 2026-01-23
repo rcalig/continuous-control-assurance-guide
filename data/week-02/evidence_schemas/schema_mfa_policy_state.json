@@ -1,1 +1,41 @@
-
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mfa_policy_state",
+  "type": "object",
+  "required": ["timestamp", "source", "tenant_or_account", "privileged_scope", "mfa_required", "allowed_factors", "bypass_rules"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "source": { "type": "string" },
+    "tenant_or_account": { "type": "string" },
+    "privileged_scope": {
+      "type": "object",
+      "required": ["definition", "included_groups_or_roles"],
+      "properties": {
+        "definition": { "type": "string" },
+        "included_groups_or_roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "mfa_required": { "type": "boolean" },
+    "allowed_factors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "bypass_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "enabled", "scope"],
+        "properties": {
+          "rule_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "scope": { "type": "string" }
+        }
+      }
+    }
+  }
+}
