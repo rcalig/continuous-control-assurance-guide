@@ -1,0 +1,17 @@
+{
+  "assertion_id": "RAP-03",
+  "evaluated_at": "2026-01-30T10:21:20Z",
+  "result": "PASS",
+  "reason": "CloudTrail enabled and logging management events",
+  "affected_objects": [],
+  "evidence_refs": [
+    "cloudtrail_trails.normalized.json",
+    "cloudtrail_status.normalized.json"
+  ],
+  "metadata": {
+    "trail_count": 1,
+    "is_logging": true,
+    "collector": "week-04-evaluator",
+    "collector_version": "week-04-lab4.3-v1"
+  }
+}
