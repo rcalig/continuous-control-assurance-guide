@@ -1,0 +1,55 @@
+{
+  "collected_at": "2026-01-30T04:25:25Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-lab3.2-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "iam_policies",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-01",
+    "RAP-02",
+    "RAP-03",
+    "MFA-01"
+  ],
+  "raw_evidence": {
+    "Policies": [
+      {
+        "PolicyName": "GRC-Audit-Readonly",
+        "PolicyId": "ANPA3TJGC6PE7X6GQREVK",
+        "Arn": "arn:aws:iam::797333189577:policy/GRC-Audit-Readonly",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2025-09-12T05:15:15+00:00",
+        "UpdateDate": "2025-09-12T05:15:15+00:00"
+      },
+      {
+        "PolicyName": "Cloudtrail-CW-access-policy-Animals4lifeOrg-27f58e18-f8c6-41f4-a023-8ba28b5c1b9c",
+        "PolicyId": "ANPA3TJGC6PERVVCBEDXS",
+        "Arn": "arn:aws:iam::797333189577:policy/service-role/Cloudtrail-CW-access-policy-Animals4lifeOrg-27f58e18-f8c6-41f4-a023-8ba28b5c1b9c",
+        "Path": "/service-role/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2025-07-17T01:03:18+00:00",
+        "UpdateDate": "2025-07-17T01:03:18+00:00"
+      },
+      {
+        "PolicyName": "Cloudtrail-CW-access-policy-AccountTrail-a5230e95-f9b0-4bcc-9abf-8290036c66c1",
+        "PolicyId": "ANPA3TJGC6PEVHOWY7VVP",
+        "Arn": "arn:aws:iam::797333189577:policy/service-role/Cloudtrail-CW-access-policy-AccountTrail-a5230e95-f9b0-4bcc-9abf-8290036c66c1",
+        "Path": "/service-role/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2025-09-12T01:34:55+00:00",
+        "UpdateDate": "2025-09-12T01:34:55+00:00"
+      }
+    ]
+  }
+}

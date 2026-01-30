@@ -1,0 +1,16 @@
+{
+    "trailList": [
+        {
+            "Name": "grc-account-trail",
+            "S3BucketName": "grc-cloudtrail-797333189577-20250929145445",
+            "IncludeGlobalServiceEvents": true,
+            "IsMultiRegionTrail": true,
+            "HomeRegion": "ap-southeast-2",
+            "TrailARN": "arn:aws:cloudtrail:ap-southeast-2:797333189577:trail/grc-account-trail",
+            "LogFileValidationEnabled": false,
+            "HasCustomEventSelectors": false,
+            "HasInsightSelectors": false,
+            "IsOrganizationTrail": false
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+  "collected_at": "2026-01-30T04:26:13Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-lab3.2-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "cloudtrail_status",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-03"
+  ],
+  "raw_evidence": {
+    "IsLogging": true,
+    "LatestDeliveryTime": "2026-01-30T14:52:39.770000+11:00",
+    "StartLoggingTime": "2025-09-29T15:05:17.069000+10:00",
+    "LatestDeliveryAttemptTime": "2026-01-30T03:52:39Z",
+    "LatestNotificationAttemptTime": "",
+    "LatestNotificationAttemptSucceeded": "",
+    "LatestDeliveryAttemptSucceeded": "2026-01-30T03:52:39Z",
+    "TimeLoggingStarted": "2025-09-29T05:05:17Z",
+    "TimeLoggingStopped": ""
+  }
+}

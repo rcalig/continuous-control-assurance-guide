@@ -1,0 +1,28 @@
+{
+  "collected_at": "2026-01-30T04:26:10Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-lab3.2-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "cloudtrail_trails",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-03"
+  ],
+  "raw_evidence": {
+    "trailList": [
+      {
+        "Name": "grc-account-trail",
+        "S3BucketName": "grc-cloudtrail-797333189577-20250929145445",
+        "IncludeGlobalServiceEvents": true,
+        "IsMultiRegionTrail": true,
+        "HomeRegion": "ap-southeast-2",
+        "TrailARN": "arn:aws:cloudtrail:ap-southeast-2:797333189577:trail/grc-account-trail",
+        "LogFileValidationEnabled": false,
+        "HasCustomEventSelectors": false,
+        "HasInsightSelectors": false,
+        "IsOrganizationTrail": false
+      }
+    ]
+  }
+}

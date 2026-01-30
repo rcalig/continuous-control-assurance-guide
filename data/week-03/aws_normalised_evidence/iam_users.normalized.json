@@ -1,0 +1,27 @@
+{
+  "collected_at": "2026-01-30T04:25:18Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-lab3.2-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "iam_users",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-01",
+    "RAP-02",
+    "RAP-03",
+    "MFA-01"
+  ],
+  "raw_evidence": {
+    "Users": [
+      {
+        "Path": "/",
+        "UserName": "iamadmin",
+        "UserId": "AIDA3TJGC6PER5CKOPQC7",
+        "Arn": "arn:aws:iam::797333189577:user/iamadmin",
+        "CreateDate": "2025-07-04T06:04:44+00:00",
+        "PasswordLastUsed": "2025-11-02T10:16:19+00:00"
+      }
+    ]
+  }
+}
