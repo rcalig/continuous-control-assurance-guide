@@ -1,0 +1,25 @@
+{
+  "collected_at": "2026-01-30T10:31:36Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-iam-extension-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "iam_user_policy_attachments",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-02",
+    "RAP-01"
+  ],
+  "raw_evidence": {
+    "users": {
+      "iamadmin": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ]
+      }
+    }
+  }
+}

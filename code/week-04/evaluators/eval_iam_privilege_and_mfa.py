@@ -1,8 +1,7 @@
 import json
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Set
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -10,12 +9,12 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 EVIDENCE_DIR = REPO_ROOT / "data" / "week-03" / "aws_normalised_evidence"
 OUT_DIR = REPO_ROOT / "data" / "week-04" / "evaluation_results"
 
-IAM_USERS_FILE = EVIDENCE_DIR / "iam_users.normalized.json"
-IAM_POLICIES_FILE = EVIDENCE_DIR / "iam_policies.normalized.json"
-IAM_ROLES_FILE = EVIDENCE_DIR / "iam_roles.normalized.json"
+USER_ATTACH_FILE = EVIDENCE_DIR / "iam_user_policy_attachments.normalized.json"
+USER_MFA_FILE = EVIDENCE_DIR / "iam_user_mfa_devices.normalized.json"
+ROLE_ATTACH_FILE = EVIDENCE_DIR / "iam_role_policy_attachments.normalized.json"
 
 COLLECTOR = "week-04-evaluator"
-COLLECTOR_VERSION = "week-04-lab4.2-v1"
+COLLECTOR_VERSION = "week-04-lab4.2-v2"
 
 
 def utc_now_iso() -> str:
@@ -27,123 +26,139 @@ def load_normalized(path: Path) -> Dict[str, Any]:
 
 
 def payload_of(normalized: Dict[str, Any]) -> Dict[str, Any]:
-    # Week 3 normalised evidence wrapper preserved raw payload under "raw_evidence"
     raw = normalized.get("raw_evidence")
     if raw is None:
-        raise ValueError(f"Missing raw_evidence in {normalized.get('evidence_object', 'unknown')}")
+        raise ValueError(f"Missing raw_evidence in {path}")
     return raw
 
 
-def iam_usernames(iam_users_payload: Dict[str, Any]) -> List[str]:
-    # AWS iam list-users output usually has "Users": [ { "UserName": ... }, ...]
-    users = iam_users_payload.get("Users", [])
-    return [u.get("UserName") for u in users if u.get("UserName")]
+def is_admin_equivalent_policy(policy_name: str, policy_arn: str) -> bool:
+    # Deterministic starting point for RAP-02:
+    # treat AWS-managed AdministratorAccess as admin-equivalent.
+    if policy_name == "AdministratorAccess":
+        return True
+    if policy_arn.endswith(":policy/AdministratorAccess"):
+        return True
+    return False
 
 
-def users_with_mfa_enabled(iam_users_payload: Dict[str, Any]) -> Set[str]:
-    """
-    [Unverified] AWS IAM 'list-users' does NOT include MFA device state.
-    MFA device state usually comes from 'list-mfa-devices' per user.
-    This function is a placeholder to keep Lab 4.2 structure consistent.
+def users_with_direct_admin_policies(user_attach_payload: Dict[str, Any]) -> Set[str]:
+    offending: Set[str] = set()
+    users = user_attach_payload.get("users", {})
 
-    For a working MFA-01 evaluator, you will need to add raw evidence collection:
-      aws iam list-mfa-devices --user-name <user>   (for each user)
-    and normalize those outputs in Week 3 or Week 4 evidence expansion.
-    """
-    return set()
+    for username, attach_doc in users.items():
+        attached = attach_doc.get("AttachedPolicies", [])
+        for p in attached:
+            name = p.get("PolicyName", "")
+            arn = p.get("PolicyArn", "")
+            if is_admin_equivalent_policy(name, arn):
+                offending.add(username)
+                break
 
-
-def find_admin_equivalent_policies(iam_policies_payload: Dict[str, Any]) -> Set[str]:
-    """
-    Identify admin-equivalent policies by name.
-    Deterministic and simple for Week 4: treat 'AdministratorAccess' as admin-equivalent.
-    """
-    policies = iam_policies_payload.get("Policies", [])
-    admin_names = {"AdministratorAccess"}
-    return {p.get("PolicyName") for p in policies if p.get("PolicyName") in admin_names}
+    return offending
 
 
-def eval_rap_02() -> Dict[str, Any]:
+def users_with_mfa(user_mfa_payload: Dict[str, Any]) -> Set[str]:
+    enabled: Set[str] = set()
+    users = user_mfa_payload.get("users", {})
+
+    for username, mfa_doc in users.items():
+        devices = mfa_doc.get("MFADevices", [])
+        if isinstance(devices, list) and len(devices) > 0:
+            enabled.add(username)
+
+    return enabled
+
+
+def eval_rap_02(user_attach_payload: Dict[str, Any], role_attach_payload: Dict[str, Any]) -> Dict[str, Any]:
     """
     RAP-02: Administrative access is granted only through role-based mechanisms.
 
-    [Unverified] With only 'list-users', 'list-roles', and 'list-policies', we cannot
-    deterministically prove direct policy attachments to users or role assumption paths.
-    That requires:
-      - aws iam list-attached-user-policies (per user)
-      - aws iam list-user-policies (inline)
-      - aws iam list-attached-role-policies (per role)
-    So this evaluator will output INFORMATIONAL until that evidence exists.
+    PASS  -> no users have admin-equivalent policy directly attached
+    FAIL  -> one or more users have admin-equivalent policy directly attached
+
+    [Unverified] This evaluator checks direct user policy attachments only.
+    It does not yet evaluate group-based admin or external IdP role assignment.
     """
-    users_norm = load_normalized(IAM_USERS_FILE)
-    policies_norm = load_normalized(IAM_POLICIES_FILE)
-    roles_norm = load_normalized(IAM_ROLES_FILE)
+    offenders = sorted(list(users_with_direct_admin_policies(user_attach_payload)))
 
-    users_payload = payload_of(users_norm)
-    policies_payload = payload_of(policies_norm)
-    _roles_payload = payload_of(roles_norm)
+    if offenders:
+        result = "FAIL"
+        reason = "Direct admin-equivalent privilege attached to user(s)"
+        affected = offenders
+    else:
+        result = "PASS"
+        reason = "No direct admin-equivalent privilege attached to any user"
+        affected = []
 
-    admin_equiv = find_admin_equivalent_policies(policies_payload)
-    all_users = iam_usernames(users_payload)
+    # role_attach_payload is loaded to keep evidence lineage explicit, even if not needed for PASS/FAIL yet.
+    role_count = len(role_attach_payload.get("roles", {}))
 
-    result = {
+    return {
         "assertion_id": "RAP-02",
         "evaluated_at": utc_now_iso(),
-        "result": "INFORMATIONAL",
-        "reason": (
-            "Insufficient evidence to determine whether admin privileges are granted "
-            "only via role-based mechanisms. Need user/role policy attachment evidence."
-        ),
-        "affected_objects": [],
-        "evidence_refs": [
-            IAM_USERS_FILE.name,
-            IAM_POLICIES_FILE.name,
-            IAM_ROLES_FILE.name,
-        ],
+        "result": result,
+        "reason": reason,
+        "affected_objects": affected,
+        "evidence_refs": [USER_ATTACH_FILE.name, ROLE_ATTACH_FILE.name],
         "metadata": {
-            "admin_equivalent_policies_detected": sorted(list(admin_equiv)),
-            "users_observed_count": len(all_users),
+            "roles_observed_count": role_count,
             "collector": COLLECTOR,
             "collector_version": COLLECTOR_VERSION,
         },
     }
-    return result
 
 
-def eval_mfa_01() -> Dict[str, Any]:
+def eval_mfa_01(user_attach_payload: Dict[str, Any], user_mfa_payload: Dict[str, Any]) -> Dict[str, Any]:
     """
     MFA-01: All privileged user accounts require MFA for interactive access.
 
-    [Unverified] Privileged set depends on RAP-02 and/or attachment data.
-    With current evidence, we cannot determine privileged users or MFA state deterministically.
-    Output INFORMATIONAL until evidence is expanded.
+    Privileged users (Week 4 definition for determinism):
+    - users with direct admin-equivalent policy attached
+
+    PASS -> all privileged users have at least one MFA device
+    FAIL -> any privileged user has zero MFA devices
+    NOT_APPLICABLE -> no privileged users detected under this definition
+
+    [Unverified] This definition does not include role-assumed or group-based admin users yet.
     """
-    users_norm = load_normalized(IAM_USERS_FILE)
-    users_payload = payload_of(users_norm)
+    privileged = users_with_direct_admin_policies(user_attach_payload)
+    if not privileged:
+        return {
+            "assertion_id": "MFA-01",
+            "evaluated_at": utc_now_iso(),
+            "result": "NOT_APPLICABLE",
+            "reason": "No privileged users detected under current privileged-user definition",
+            "affected_objects": [],
+            "evidence_refs": [USER_ATTACH_FILE.name, USER_MFA_FILE.name],
+            "metadata": {"collector": COLLECTOR, "collector_version": COLLECTOR_VERSION},
+        }
 
-    all_users = iam_usernames(users_payload)
-    mfa_enabled = users_with_mfa_enabled(users_payload)  # placeholder empty set
+    mfa_enabled = users_with_mfa(user_mfa_payload)
+    lacking = sorted([u for u in privileged if u not in mfa_enabled])
 
-    result = {
+    if lacking:
+        result = "FAIL"
+        reason = "Privileged user(s) lack MFA devices"
+        affected = lacking
+    else:
+        result = "PASS"
+        reason = "All privileged users have MFA devices"
+        affected = []
+
+    return {
         "assertion_id": "MFA-01",
         "evaluated_at": utc_now_iso(),
-        "result": "INFORMATIONAL",
-        "reason": (
-            "Insufficient evidence to evaluate MFA for privileged users. Need privileged user "
-            "identification (policy attachments) and MFA device state evidence."
-        ),
-        "affected_objects": [],
-        "evidence_refs": [
-            IAM_USERS_FILE.name,
-        ],
+        "result": result,
+        "reason": reason,
+        "affected_objects": affected,
+        "evidence_refs": [USER_ATTACH_FILE.name, USER_MFA_FILE.name],
         "metadata": {
-            "users_observed_count": len(all_users),
-            "users_with_mfa_evidence_count": len(mfa_enabled),
+            "privileged_user_count": len(privileged),
             "collector": COLLECTOR,
             "collector_version": COLLECTOR_VERSION,
         },
     }
-    return result
 
 
 def write_result(filename: str, obj: Dict[str, Any]) -> None:
@@ -154,8 +169,16 @@ def write_result(filename: str, obj: Dict[str, Any]) -> None:
 
 
 def main() -> None:
-    rap02 = eval_rap_02()
-    mfa01 = eval_mfa_01()
+    user_attach_norm = load_normalized(USER_ATTACH_FILE)
+    user_mfa_norm = load_normalized(USER_MFA_FILE)
+    role_attach_norm = load_normalized(ROLE_ATTACH_FILE)
+
+    user_attach_payload = user_attach_norm.get("raw_evidence", {})
+    user_mfa_payload = user_mfa_norm.get("raw_evidence", {})
+    role_attach_payload = role_attach_norm.get("raw_evidence", {})
+
+    rap02 = eval_rap_02(user_attach_payload, role_attach_payload)
+    mfa01 = eval_mfa_01(user_attach_payload, user_mfa_payload)
 
     write_result("rap-02.result.json", rap02)
     write_result("mfa-01.result.json", mfa01)

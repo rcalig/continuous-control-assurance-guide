@@ -1,0 +1,154 @@
+{
+  "collected_at": "2026-01-30T10:31:42Z",
+  "collector": "aws_cli",
+  "collector_version": "week-03-iam-extension-v1",
+  "cloud_account": "797333189577",
+  "region": "us-east-1",
+  "evidence_object": "iam_role_policy_attachments",
+  "evidence_type": "configuration_state",
+  "related_assertions": [
+    "RAP-02"
+  ],
+  "raw_evidence": {
+    "roles": {
+      "AWSServiceRoleForAmazonGuardDuty": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AmazonGuardDutyServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AmazonGuardDutyServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSServiceRoleForAmazonGuardDutyMalwareProtection": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AmazonGuardDutyMalwareProtectionServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AmazonGuardDutyMalwareProtectionServiceRolePolicy"
+          }
+        ]
+      },
+      "lambda-grc-basic": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSLambdaBasicExecutionRole",
+            "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+          }
+        ]
+      },
+      "GRC-Audit-Role": {
+        "AttachedPolicies": []
+      },
+      "AWSServiceRoleForCloudTrail": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "CloudTrailServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/CloudTrailServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSReservedSSO_AdministratorAccess_4f72a03ce2249233": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ]
+      },
+      "AWSServiceRoleForTrustedAdvisor": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSTrustedAdvisorServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSTrustedAdvisorServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSServiceRoleForAccessAnalyzer": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AccessAnalyzerServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AccessAnalyzerServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSServiceRoleForSupport": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSSupportServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSSupportServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSServiceRoleForSSO": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSSSOServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSSSOServiceRolePolicy"
+          }
+        ]
+      },
+      "vpc-flow-logs-roles": {
+        "AttachedPolicies": []
+      },
+      "AWSServiceRoleForSecurityHubV2": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSSecurityHubV2ServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSSecurityHubV2ServiceRolePolicy"
+          }
+        ]
+      },
+      "AWSServiceRoleForResourceExplorer": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSResourceExplorerServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSResourceExplorerServiceRolePolicy"
+          }
+        ]
+      },
+      "lambda-execution-role": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSLambdaBasicExecutionRole",
+            "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+          },
+          {
+            "PolicyName": "AmazonSNSFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
+          }
+        ]
+      },
+      "AWSServiceRoleForOrganizations": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSOrganizationsServiceTrustPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSOrganizationsServiceTrustPolicy"
+          }
+        ]
+      },
+      "IncidentResponseRole": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSLambdaBasicExecutionRole",
+            "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+          },
+          {
+            "PolicyName": "AmazonSNSFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
+          },
+          {
+            "PolicyName": "AmazonS3FullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+          }
+        ]
+      },
+      "AWSServiceRoleForConfig": {
+        "AttachedPolicies": [
+          {
+            "PolicyName": "AWSConfigServiceRolePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/aws-service-role/AWSConfigServiceRolePolicy"
+          }
+        ]
+      }
+    }
+  }
+}

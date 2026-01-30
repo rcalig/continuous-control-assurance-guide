@@ -1,18 +1,18 @@
 {
   "assertion_id": "RAP-02",
-  "evaluated_at": "2026-01-30T10:04:32Z",
-  "result": "INFORMATIONAL",
-  "reason": "Insufficient evidence to determine whether admin privileges are granted only via role-based mechanisms. Need user/role policy attachment evidence.",
-  "affected_objects": [],
+  "evaluated_at": "2026-01-30T10:32:55Z",
+  "result": "FAIL",
+  "reason": "Direct admin-equivalent privilege attached to user(s)",
+  "affected_objects": [
+    "iamadmin"
+  ],
   "evidence_refs": [
-    "iam_users.normalized.json",
-    "iam_policies.normalized.json",
-    "iam_roles.normalized.json"
+    "iam_user_policy_attachments.normalized.json",
+    "iam_role_policy_attachments.normalized.json"
   ],
   "metadata": {
-    "admin_equivalent_policies_detected": [],
-    "users_observed_count": 1,
+    "roles_observed_count": 17,
     "collector": "week-04-evaluator",
-    "collector_version": "week-04-lab4.2-v1"
+    "collector_version": "week-04-lab4.2-v2"
   }
 }

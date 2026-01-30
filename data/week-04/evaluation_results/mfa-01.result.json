@@ -1,16 +1,16 @@
 {
   "assertion_id": "MFA-01",
-  "evaluated_at": "2026-01-30T10:04:32Z",
-  "result": "INFORMATIONAL",
-  "reason": "Insufficient evidence to evaluate MFA for privileged users. Need privileged user identification (policy attachments) and MFA device state evidence.",
+  "evaluated_at": "2026-01-30T10:32:55Z",
+  "result": "PASS",
+  "reason": "All privileged users have MFA devices",
   "affected_objects": [],
   "evidence_refs": [
-    "iam_users.normalized.json"
+    "iam_user_policy_attachments.normalized.json",
+    "iam_user_mfa_devices.normalized.json"
   ],
   "metadata": {
-    "users_observed_count": 1,
-    "users_with_mfa_evidence_count": 0,
+    "privileged_user_count": 1,
     "collector": "week-04-evaluator",
-    "collector_version": "week-04-lab4.2-v1"
+    "collector_version": "week-04-lab4.2-v2"
   }
 }
